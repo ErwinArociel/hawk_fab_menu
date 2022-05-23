@@ -16,6 +16,7 @@ class HawkFabMenu extends StatefulWidget {
   final Color? backgroundColor;
   final BorderSide buttonBorder;
   final String? heroTag;
+  final bool mini;
 
   HawkFabMenu({
     Key? key,
@@ -30,6 +31,7 @@ class HawkFabMenu extends StatefulWidget {
     this.openIcon,
     this.closeIcon,
     this.heroTag,
+    this.mini = false
   }) : super(key: key) {
     assert(items.isNotEmpty);
   }
@@ -185,6 +187,7 @@ class _HawkFabMenuState extends State<HawkFabMenu>
       right: 10,
       child: FloatingActionButton(
         child: iconWidget,
+        mini: widget.mini,
         heroTag: widget.heroTag ?? '_HawkFabMenu_$hashCode',
         backgroundColor: widget.fabColor ?? Theme.of(context).primaryColor,
         onPressed: _toggleMenu,
