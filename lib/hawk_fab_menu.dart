@@ -17,6 +17,7 @@ class HawkFabMenu extends StatefulWidget {
   final BorderSide buttonBorder;
   final String? heroTag;
   final bool mini;
+  final void Function(bool isOpen)? onMenuToggle;
 
   HawkFabMenu({
     Key? key,
@@ -31,7 +32,8 @@ class HawkFabMenu extends StatefulWidget {
     this.openIcon,
     this.closeIcon,
     this.heroTag,
-    this.mini = false
+    this.mini = false,
+    this.onMenuToggle,
   }) : super(key: key) {
     assert(items.isNotEmpty);
   }
@@ -78,6 +80,7 @@ class _HawkFabMenuState extends State<HawkFabMenu>
     setState(() {
       _isOpen = !_isOpen;
     });
+    widget.onMenuToggle?.call(_isOpen);
     if (_isOpen) {
       _iconAnimationCtrl.forward();
     } else {
