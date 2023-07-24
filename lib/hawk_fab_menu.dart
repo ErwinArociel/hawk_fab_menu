@@ -17,6 +17,7 @@ class HawkFabMenu extends StatefulWidget {
   final BorderSide buttonBorder;
   final String? heroTag;
   final bool mini;
+  final bool isHidden;
   final void Function(bool isOpen)? onMenuToggle;
 
   HawkFabMenu({
@@ -33,6 +34,7 @@ class HawkFabMenu extends StatefulWidget {
     this.closeIcon,
     this.heroTag,
     this.mini = false,
+    this.isHidden = false,
     this.onMenuToggle,
   }) : super(key: key) {
     assert(items.isNotEmpty);
@@ -185,18 +187,20 @@ class _HawkFabMenuState extends State<HawkFabMenu>
         color: widget.iconColor,
       );
     }
-    return Positioned(
-      bottom: 10,
-      right: 10,
-      child: FloatingActionButton(
-        child: iconWidget,
-        mini: widget.mini,
-        heroTag: widget.heroTag ?? '_HawkFabMenu_$hashCode',
-        backgroundColor: widget.fabColor ?? Theme.of(context).primaryColor,
-        onPressed: _toggleMenu,
-        shape: StadiumBorder(side: widget.buttonBorder),
-      ),
-    );
+    return Visibility(
+        visible: !widget.isHidden,
+        child: Positioned(
+          bottom: 10,
+          right: 10,
+          child: FloatingActionButton(
+            child: iconWidget,
+            mini: widget.mini,
+            heroTag: widget.heroTag ?? '_HawkFabMenu_$hashCode',
+            backgroundColor: widget.fabColor ?? Theme.of(context).primaryColor,
+            onPressed: _toggleMenu,
+            shape: StadiumBorder(side: widget.buttonBorder),
+          ),
+        ));
   }
 }
 
